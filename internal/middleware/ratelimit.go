@@ -13,8 +13,16 @@ const RateLimitTokenName = "X-Rate-Limit-Token"
 // RateLimitMiddleware creates a Gin middleware that limits QPS per key.
 // Key is extracted from request header "X-Rate-Limit-Token".
 // Requests without the key pass through, requests exceeding QPS get 429.
-func RateLimitMiddleware(maxQps int) gin.HandlerFunc {
+// Background sweep goroutine is started and closed when quit is signaled.
+func RateLimitMiddleware(maxQps int, quit <-chan struct{}) gin.HandlerFunc {
 	group := ratelimit.NewGroup(maxQps, time.Second)
+	group.StartSweepGoroutine(time.Second)
+
+	go func() {
+		<-quit
+		group.CloseSweepGoroutine()
+	}()
+
 	return func(ctx *gin.Context) {
 		key := ctx.GetHeader(RateLimitTokenName)
 		if key == "" {

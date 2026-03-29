@@ -13,7 +13,7 @@ import (
 func Run(maxQps int, address string, quit <-chan struct{}) {
 	engine := gin.New()
 	engine.Use(gin.Recovery())
-	engine.Use(middleware.RateLimitMiddleware(maxQps))
+	engine.Use(middleware.RateLimitMiddleware(maxQps, quit))
 
 	engine.GET("/api/ping", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{"value": rand.Int64()})

@@ -8,7 +8,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/stretchr/testify v1.11.1
 	github.com/yylego/must v0.0.0
-	github.com/yylego/ratelimit v0.0.0
+	github.com/yylego/ratelimit v0.0.1
 	github.com/yylego/rese v0.0.0
 )
 
@@ -39,7 +39,7 @@ require (
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.3.1 // indirect
 	github.com/yylego/done v0.0.0 // indirect
-	github.com/yylego/heapx v0.0.0 // indirect
+	github.com/yylego/heapx v0.0.1 // indirect
 	github.com/yylego/mutexmap v0.0.0 // indirect
 	github.com/yylego/zaplog v0.0.0 // indirect
 	go.mongodb.org/mongo-driver/v2 v2.5.0 // indirect
